@@ -147,7 +147,7 @@ const InventorySlot: React.FC<SlotProps> = ({ inventory, item }) => {
               : undefined,
           opacity: isDragging ? 0.4 : 1.0,
           backgroundImage: `url(${item?.name ? getItemUrl(item as SlotWithItem) : 'none'}`,
-          border: isOver ? '1px dashed rgba(255,255,255,0.4)' : '',
+          border: isOver ? '1px solid rgba(255,255,255,0.4)' : '',
         }}
       >
         {isSlotWithItem(item) && (
@@ -159,28 +159,25 @@ const InventorySlot: React.FC<SlotProps> = ({ inventory, item }) => {
                   : 'item-slot-header-wrapper'
               }
             >
+            <div className="item-slot-info-wrapper">
+              <p>{item.count ? item.count.toLocaleString('en-us') + `x` : ''}</p>
+              <p>
+                {item.weight > 0
+                  ? item.weight >= 1000
+                    ? `${(item.weight / 1000).toLocaleString('en-us', {
+                        minimumFractionDigits: 0,
+                      })}kg `
+                    : `${item.weight.toLocaleString('en-us', {
+                        minimumFractionDigits: 0,
+                      })}g `
+                  : ''}
+              </p>
+            </div>
               {inventory.type === 'player' && item.slot <= 5 && (
-                <div className="inventory-slot-number">{item.slot}</div>
-              )}
-              <div className="item-slot-info-wrapper">
-                <p>
-                  {item.weight > 0
-                    ? item.weight >= 1000
-                      ? `${(item.weight / 1000).toLocaleString('en-us', {
-                          minimumFractionDigits: 2,
-                        })}kg `
-                      : `${item.weight.toLocaleString('en-us', {
-                          minimumFractionDigits: 0,
-                        })}g `
-                    : ''}
-                </p>
-                <p>{item.count ? item.count.toLocaleString('en-us') + `x` : ''}</p>
-              </div>
+                  <div className="inventory-slot-number">{item.slot}</div>
+                )}
             </div>
             <div>
-              {inventory.type !== 'shop' && item?.durability !== undefined && (
-                <WeightBar percent={item.durability} durability />
-              )}
               {inventory.type === 'shop' && item?.price !== undefined && (
                 <>
                   {item?.currency !== 'money' && item.currency !== 'black_money' && item.price > 0 && item.currency ? (
@@ -220,6 +217,9 @@ const InventorySlot: React.FC<SlotProps> = ({ inventory, item }) => {
                   {item.metadata?.label ? item.metadata.label : Items[item.name]?.label || item.name}
                 </div>
               </div>
+              {inventory.type !== 'shop' && item?.durability !== undefined && (
+                <WeightBar percent={item.durability} durability />
+              )}
             </div>
           </div>
         )}

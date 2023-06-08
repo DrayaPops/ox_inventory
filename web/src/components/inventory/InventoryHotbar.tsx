@@ -45,7 +45,7 @@ const InventoryHotbar: React.FC = () => {
                       {item.weight > 0
                         ? item.weight >= 1000
                           ? `${(item.weight / 1000).toLocaleString('en-us', {
-                              minimumFractionDigits: 2,
+                              minimumFractionDigits: 0,
                             })}kg `
                           : `${item.weight.toLocaleString('en-us', {
                               minimumFractionDigits: 0,

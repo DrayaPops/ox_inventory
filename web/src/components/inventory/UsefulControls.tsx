@@ -39,7 +39,7 @@ const UsefulControls: React.FC<Props> = ({ infoVisible, setInfoVisible }) => {
       <DialogContent>
         <div className="useful-controls-content-wrapper">
           <p>
-            <kbd>RMB</kbd>
+            <kbd>RMB - shows options to use, give or drop</kbd>
             <br />
             {Locale.ui_rmb}
           </p>
@@ -66,7 +66,7 @@ const UsefulControls: React.FC<Props> = ({ infoVisible, setInfoVisible }) => {
         </div>
       </DialogContent>
       <DialogActions>
-        <span onClick={() => setOpen(true)}>🐂</span>
+        <span onClick={() => setOpen(true)}>💜</span>
       </DialogActions>
       <Snackbar
         open={open}
@@ -75,7 +75,7 @@ const UsefulControls: React.FC<Props> = ({ infoVisible, setInfoVisible }) => {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert severity="success" color="info" sx={{ width: '100%' }}>
-          Made with 🐂 by the Overextended team
+          Inspired and edited by Draya 💜
         </Alert>
       </Snackbar>
     </Dialog>
